@@ -1,0 +1,73 @@
+﻿@model List<VistaLibro>
+
+@{
+    int numeroregistros = (int)ViewData["REGISTROS"];
+    int numeropagina = 1;
+}
+
+@{
+    ViewData["Title"] = "PaginarGrupoDepartamento";
+}
+<h1>Paginar libro</h1>
+
+<ul class="list-group list-group-horizontal">
+    @for (int i = 1; i <= numeroregistros; i += 10)
+    {
+
+        <li class="list-group-item list-group-item-danger">
+            <a asp-controller="Paginacion"
+           asp-action="PaginarVistaLibros"
+           asp-route-posicion="@i">
+                @numeropagina
+            </a>
+        </li>
+
+        numeropagina += 1;
+    }
+
+</ul>
+
+<hr />
+@Html.Raw(ViewData["LINKS"])
+<hr />
+
+
+<table class="table table-warning">
+    <thead>
+        <tr>
+            
+            <th>
+                Titulo
+            </th>
+            <th>
+                Portada
+            </th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @item.Titulo
+                </td>
+                <td>
+                    <img style="width:100px;height:100px" src="~/images/@item.Portada" />
+                </td>
+
+                <td>
+
+                    <a class="nav-link text-dark"
+                   asp-area="" asp-controller="Libro"
+                   asp-action="Details"
+                   asp-route-idlibro="@item.IdLibro">Detalles</a>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

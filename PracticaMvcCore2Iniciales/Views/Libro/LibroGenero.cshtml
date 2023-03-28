@@ -1,0 +1,56 @@
+﻿@model IEnumerable<PracticaMvcCore2Iniciales.Models.Libro>
+
+@{
+    ViewData["Title"] = "Libro";
+}
+
+<h1>Libro</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Portada)
+            </th>
+
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+
+
+                <td>
+                    <img style="width:100px;height:100px" src="~/images/@item.Portada" />
+
+                </td>
+
+
+
+                <td>
+
+                    <a class="nav-link text-dark"
+                   asp-area="" asp-controller="Libro"
+                   asp-action="Details"
+                   asp-route-idlibro="@item.IdLibro">Detalles</a>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
